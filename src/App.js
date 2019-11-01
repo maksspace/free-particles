@@ -1,25 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState, useEffect } from 'react';
+import image from './logo.jpg';
+import { Particle } from './lib/particle';
 
 function App() {
+  const el = useRef(null);
+  const [fps, setFps] = useState(0);
+  const [tt, setCalc] = useState(0);
+  const [ff, setFF] = useState(0);
+
+  useEffect(() => {
+    if (el.current) {
+      Particle(
+        el.current,
+        fps => {
+          setFps(fps);
+        },
+        f => {
+          setCalc(f);
+        },
+        i => {
+          setFF(i);
+        }
+      );
+    }
+  }, [el]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <b
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          zIndex: 1000,
+          color: 'white'
+        }}
+      >
+        {fps} draw fps
+        <br />
+        {tt} calc fps
+        <br />
+        {ff} total fps
+      </b>
+      <img
+        id='image'
+        style={{ margin: '0 auto' }}
+        ref={el}
+        src={image}
+        alt='qwe'
+      />
+    </>
   );
 }
 
