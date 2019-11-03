@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import image from './logo.jpg';
-import { Particle } from './lib/particle';
+import { factory } from './lib/particle';
 
 function App() {
   const el = useRef(null);
@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     if (el.current) {
-      Particle(
+      factory(
         el.current,
         fps => {
           setFps(fps);
