@@ -639,7 +639,7 @@ export const factory = (el, onDraw, onCalc, onFps) => {
   return new FreeParticle({
     image: el,
     particleGap: 7,
-    mouseForce: -500,
+    mouseForce: 100,
     noise: 10,
     gravity: 0.08,
     width: ~~(el.clientWidth * scalingFactor),

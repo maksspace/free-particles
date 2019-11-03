@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import image from './logo.jpg';
+import image from './apple.jpg';
 import { factory } from './lib/particle';
 
 function App() {
