@@ -349,43 +349,8 @@ class FreeParticle {
   }
 
   _initParticlePosition(origin) {
-    const t = origin;
-    const i = origin.particle;
-    switch (this.initPosition) {
-      case 'random':
-        i.x = Math.random() * this.width;
-        i.y = Math.random() * this.height;
-        break;
-
-      case 'top':
-        i.x = Math.random() * this.width * 3 - this.width;
-        i.y = -Math.random() * this.height;
-        break;
-
-      case 'left':
-        i.x = -Math.random() * this.width;
-        i.y = Math.random() * this.height * 3 - this.height;
-        break;
-
-      case 'bottom':
-        i.x = Math.random() * this.width * 3 - this.width;
-        i.y = this.height + Math.random() * this.height;
-        break;
-
-      case 'right':
-        i.x = this.width + Math.random() * this.width;
-        i.y = Math.random() * this.height * 3 - this.height;
-        break;
-
-      case 'misplaced':
-        i.x = t.x + Math.random() * this.width * 0.3 - 0.1 * this.width;
-        i.y = t.y + Math.random() * this.height * 0.3 - 0.1 * this.height;
-        break;
-
-      default:
-        i.x = t.x;
-        i.y = t.y;
-    }
+    origin.particle.x = Math.random() * this.width;
+    origin.particle.y = Math.random() * this.height;
   }
 
   _fade() {
@@ -405,117 +370,24 @@ class FreeParticle {
   }
 
   _fadeOriginPosition(t) {
-    switch (this.fadePosition) {
-      case 'random':
-        (t.x = Math.random() * this.width * 2 - this.width),
-          (t.y = Math.random() * this.height * 2 - this.height),
-          0 < t.x && (t.x += this.width),
-          0 < t.y && (t.y += this.height);
-        break;
-
-      case 'top':
-        (t.x = Math.random() * this.width * 3 - this.width),
-          (t.y = -Math.random() * this.height);
-        break;
-
-      case 'left':
-        (t.x = -Math.random() * this.width),
-          (t.y = Math.random() * this.height * 3 - this.height);
-        break;
-
-      case 'bottom':
-        (t.x = Math.random() * this.width * 3 - this.width),
-          (t.y = this.height + Math.random() * this.height);
-        break;
-
-      case 'right':
-        (t.x = this.width + Math.random() * this.width),
-          (t.y = Math.random() * this.height * 3 - this.height);
-    }
+    t.x = Math.random() * this.width * 2 - this.width;
+    t.y = Math.random() * this.height * 2 - this.height;
+    0 < t.x && (t.x += this.width);
+    0 < t.y && (t.y += this.height);
   }
 
   _initParticleDirection(t) {
-    switch (((t.vz = 0), this.initDirection)) {
-      case 'random':
-        (w = Math.random() * Math.PI * 2),
-          (I = Math.random()),
-          (t.vx = this.width * I * Math.sin(w) * 0.1),
-          (t.vy = this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'top':
-        (w = Math.random() * Math.PI - Math.PI / 2),
-          (I = Math.random()),
-          (t.vx = this.width * I * Math.sin(w) * 0.1),
-          (t.vy = this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'left':
-        (w = Math.random() * Math.PI + Math.PI),
-          (I = Math.random()),
-          (t.vx = this.width * I * Math.sin(w) * 0.1),
-          (t.vy = this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'bottom':
-        (w = Math.random() * Math.PI + Math.PI / 2),
-          (I = Math.random()),
-          (t.vx = this.width * I * Math.sin(w) * 0.1),
-          (t.vy = this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'right':
-        (w = Math.random() * Math.PI),
-          (I = Math.random()),
-          (t.vx = this.width * I * Math.sin(w) * 0.1),
-          (t.vy = this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      default:
-        (t.vx = 0), (t.vy = 0);
-    }
+    w = Math.random() * Math.PI * 2;
+    I = Math.random();
+    t.vx = this.width * I * Math.sin(w) * 0.1;
+    t.vy = this.height * I * Math.cos(w) * 0.1;
   }
 
   _fadeOriginDirection(t) {
-    switch (this.fadeDirection) {
-      case 'random':
-        (w = Math.random() * Math.PI * 2),
-          (I = Math.random()),
-          (t.vx += this.width * I * Math.sin(w) * 0.1),
-          (t.vy += this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'top':
-        (w = Math.random() * Math.PI - Math.PI / 2),
-          (I = Math.random()),
-          (t.vx += this.width * I * Math.sin(w) * 0.1),
-          (t.vy += this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'left':
-        (w = Math.random() * Math.PI + Math.PI),
-          (I = Math.random()),
-          (t.vx += this.width * I * Math.sin(w) * 0.1),
-          (t.vy += this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'bottom':
-        (w = Math.random() * Math.PI + Math.PI / 2),
-          (I = Math.random()),
-          (t.vx += this.width * I * Math.sin(w) * 0.1),
-          (t.vy += this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      case 'right':
-        (w = Math.random() * Math.PI),
-          (I = Math.random()),
-          (t.vx += this.width * I * Math.sin(w) * 0.1),
-          (t.vy += this.height * I * Math.cos(w) * 0.1);
-        break;
-
-      default:
-        (t.vx = 0), (t.vy = 0);
-    }
+    w = Math.random() * Math.PI * 2;
+    I = Math.random();
+    t.vx += this.width * I * Math.sin(w) * 0.1;
+    t.vy += this.height * I * Math.cos(w) * 0.1;
   }
 
   _initOrigins() {
@@ -573,31 +445,6 @@ class FreeParticle {
         }
     this.speed = Math.log(this.origins.length) / 10;
     this.gravityFactor = 1 - this.gravity * this.speed;
-  }
-
-  _parseColor(t) {
-    let i = 0;
-
-    if ('string' == typeof t) {
-      var e = t.replace(' ', '');
-      if ((i = /^#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})/.exec(e)))
-        i = [parseInt(i[1], 16), parseInt(i[2], 16), parseInt(i[3], 16)];
-      else if ((i = /^#([\da-fA-F])([\da-fA-F])([\da-fA-F])/.exec(e)))
-        i = [
-          17 * parseInt(i[1], 16),
-          17 * parseInt(i[2], 16),
-          17 * parseInt(i[3], 16)
-        ];
-      else if (
-        (i = /^rgba\(([\d]+),([\d]+),([\d]+),([\d]+|[\d]*.[\d]+)\)/.exec(e))
-      )
-        i = [+i[1], +i[2], +i[3], +i[4]];
-      else {
-        if (!(i = /^rgb\(([\d]+),([\d]+),([\d]+)\)/.exec(e))) return;
-        i = [+i[1], +i[2], +i[3]];
-      }
-      return i;
-    }
   }
 
   get _mouseHandler() {
